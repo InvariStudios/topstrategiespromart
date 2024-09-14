@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Promart Reto Tecnico</string>
     <string name="logo">logo</string>
+    <string name="cargando">Cargando</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="btnGoogle">Continuar con Google</string>
 </resources>

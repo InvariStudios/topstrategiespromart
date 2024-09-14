@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "273892964545",
+    "project_id": "reto-tecnico-promart",
+    "storage_bucket": "reto-tecnico-promart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273892964545:android:c2304d000316d5232d7c40",
+        "android_client_info": {
+          "package_name": "invari.studios.promartretotecnico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273892964545-pbna8981qf6g0v2diorb9ud12el470pv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "invari.studios.promartretotecnico",
+            "certificate_hash": "13d7eeaf855279f9aa9c590087040122f50dca47"
+          }
+        },
+        {
+          "client_id": "273892964545-ad1fvc5dq9jn7vb2f2mio5jnhk8bm8b8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7Ya1WeborO0LgmH974WP8OS87rvq0MDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273892964545-ad1fvc5dq9jn7vb2f2mio5jnhk8bm8b8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
