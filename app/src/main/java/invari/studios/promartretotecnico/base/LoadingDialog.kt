@@ -9,14 +9,14 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import invari.studios.promartretotecnico.databinding.LoadingBinding
+import invari.studios.promartretotecnico.databinding.ActivityMainBinding
 
 
 class LoadingDialog : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = LoadingBinding.inflate(inflater, container, false)
+        val binding = ActivityMainBinding.inflate(inflater, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return binding.root

@@ -24,6 +24,12 @@ android {
         viewBinding true
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "baseUrl", '" https://api.themoviedb.org/3/"'
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -68,5 +74,8 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
+    implementation libs.firebase.remote.config
     implementation(libs.googlePlayServicesAuth)
+
+
 }

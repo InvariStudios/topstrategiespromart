@@ -8,17 +8,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import invari.studios.promartretotecnico.databinding.LoadingBinding
+import invari.studios.promartretotecnico.databinding.ActivityBaseBinding
 import invari.studios.promartretotecnico.databinding.ModalErrorBinding
 
 abstract class BaseActivity : AppCompatActivity() {
-    private lateinit var binding : LoadingBinding
+    private lateinit var binding : ActivityBaseBinding
     private var progressDialog: LoadingDialog = LoadingDialog()
     private var progressIniciado = false
     private var statusOnline = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LoadingBinding.inflate(layoutInflater)
+        binding = ActivityBaseBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
