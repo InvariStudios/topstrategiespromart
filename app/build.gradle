@@ -70,7 +70,7 @@ dependencies {
     testImplementation(libs.mockito.junit.jupiter)
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test)
-    implementation(libs.kotlinx.coroutines.core)
+    testImplementation libs.mockk
 
     implementation libs.androidx.activity.ktx
     implementation libs.androidx.fragment.ktx
@@ -102,5 +102,9 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
 
+
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.mockk.v1137)
+    testImplementation(libs.kotlinx.coroutines.test)
 
 }
