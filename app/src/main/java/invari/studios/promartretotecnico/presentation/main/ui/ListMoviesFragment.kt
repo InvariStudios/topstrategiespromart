@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import invari.studios.promartretotecnico.R
@@ -16,6 +19,7 @@ import invari.studios.promartretotecnico.data.model.PopularMovie
 import invari.studios.promartretotecnico.databinding.FragmentListMoviesBinding
 import invari.studios.promartretotecnico.presentation.main.adapter.MoviesAdapter
 import invari.studios.promartretotecnico.presentation.main.viewmodel.MovieViewModel
+import kotlinx.coroutines.launch
 import java.util.ArrayList
 
 @AndroidEntryPoint
@@ -33,8 +37,19 @@ class ListMoviesFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setObservers()
-        viewModel.getPopularMovies()
+        //setObserverFlow()
+
+
+        //Function using live data option
+        if(isOnline(requireContext())){
+            viewModel.getPopularMovies()
+        }
+        //Function using flows option
+        //viewModel.getPopularMoviesWithFlows()
+
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 query?.let {
@@ -69,7 +84,34 @@ class ListMoviesFragment : BaseFragment() {
         adapterMovie.setPopularMovies(response)
         binding.rvMovies.adapter = adapterMovie
     }
+    private fun setObserverFlow(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.popularMovieFlowResult.collect { result ->
+                    when (result) {
+                        is ServiceResult.Success -> {
+                            hideProgressDialog()
+                            val list = result.data.results
+                            setPopularList(list)
+                        }
+                        is ServiceResult.Error -> {
+                            hideProgressDialog()
+                        }
+                        ServiceResult.Loading -> {
+                            showProgressDialog()
+                        }
+
+                        null -> {
+                            //nothing
+                        }
+                    }
+                }
+            }
+        }
+
+    }
     private fun setObservers(){
+        //Case when use livedata
         viewModel.popularMovieResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is ServiceResult.Success -> {
@@ -84,7 +126,10 @@ class ListMoviesFragment : BaseFragment() {
                 ServiceResult.Loading -> {
                     showProgressDialog()
                 }
-                else -> {}
+
+                null -> {
+                    //nothing
+                }
             }
         }
         viewModel.moviesDbResult.observe(viewLifecycleOwner) { result ->
@@ -100,7 +145,10 @@ class ListMoviesFragment : BaseFragment() {
                 ServiceResult.Loading -> {
                     showProgressDialog()
                 }
-                else -> {}
+
+                null -> {
+                    //nothing
+                }
             }
         }
     }

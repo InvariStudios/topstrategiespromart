@@ -39,7 +39,7 @@ class RoomMoviesAdapter(
         fun bind(movie: MovieDB) {
             binding.apply {
                 containerMovie.setOnClickListener{
-                    //onItemClick.invoke(movie)
+
                 }
                 tvMovieTitle.text = movie.title
                 Glide.with(context)

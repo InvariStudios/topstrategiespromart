@@ -81,11 +81,15 @@ class LoginActivity : BaseActivity() {
         viewModel.authenticate.observe(this) { result ->
             when (result) {
                 is ServiceResult.Success -> {
+                    hideProgressDialog()
                     goToMain()
                 }
                 is ServiceResult.Error -> {
+                    hideProgressDialog()
+                    //Handle error
                 }
-                ServiceResult.Loading -> {
+                is ServiceResult.Loading -> {
+                    showProgressDialog()
                 }
             }
         }

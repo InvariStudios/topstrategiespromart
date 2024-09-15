@@ -24,9 +24,4 @@ class MovieWorker @AssistedInject constructor(
             Result.retry()
         }
     }
-
-    @AssistedFactory
-    interface Factory {
-        fun create(context: Context, workerParams: WorkerParameters): MovieWorker
-    }
 }

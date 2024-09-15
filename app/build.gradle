@@ -45,7 +45,13 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    defaultConfig {
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+    }
 }
+
 
 dependencies {
     implementation libs.androidx.core.ktx
@@ -100,11 +106,11 @@ dependencies {
 
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation libs.kotlinx.coroutines.core
     kapt(libs.androidx.room.compiler)
 
-
-    testImplementation(libs.mockito.inline)
-    testImplementation(libs.mockk.v1137)
     testImplementation(libs.kotlinx.coroutines.test)
+
+
 
 }

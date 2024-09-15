@@ -13,13 +13,11 @@ abstract class BaseFragment : Fragment() {
     private var progressDialog: LoadingDialog? = null
     private var progressIniciado = false
     fun showProgressDialog() {
-        if (isAdded && !requireActivity().isFinishing) {
-            if (!progressIniciado) {
-                progressDialog = LoadingDialog()
-                progressDialog?.isCancelable = false
-                progressDialog?.show(requireFragmentManager(), "LoadingDialog")
-                progressIniciado = true
-            }
+        if (isAdded && !requireActivity().isFinishing && !progressIniciado) {
+            progressDialog = LoadingDialog()
+            progressDialog?.isCancelable = false
+            progressDialog?.show(parentFragmentManager, "LoadingDialog")
+            progressIniciado = true
         }
     }
 

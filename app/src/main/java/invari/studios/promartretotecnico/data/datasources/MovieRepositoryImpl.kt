@@ -37,7 +37,6 @@ class MovieRepositoryImpl @Inject constructor(
         }
         movieDao.insertMovies(movies)
     }
-
     override suspend fun getMoviesFromDb(query:String): ServiceResult<List<MovieDB>> {
         return ServiceResult.Success(movieDao.searchMovies(query))
     }

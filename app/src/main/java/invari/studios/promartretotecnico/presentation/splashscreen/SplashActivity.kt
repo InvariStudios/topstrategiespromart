@@ -1,5 +1,6 @@
 package invari.studios.promartretotecnico.presentation.splashscreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -11,6 +12,7 @@ import invari.studios.promartretotecnico.databinding.ActivitySplashBinding
 import invari.studios.promartretotecnico.presentation.login.LoginActivity
 import invari.studios.promartretotecnico.utils.Constants
 
+@SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySplashBinding

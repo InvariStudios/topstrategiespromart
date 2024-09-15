@@ -22,7 +22,6 @@ class LoginRepositoryImpl @Inject constructor(
                     if (task.isSuccessful) {
                         try {
                             //Podria registrarlo a db
-                            val user = task.result?.user
                             continuation.resume(
                                 ServiceResult.Success(true)
                             )

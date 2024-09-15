@@ -22,11 +22,14 @@ class MyApp : Application(), Configuration.Provider {
 
     @Inject
     lateinit var workerFactory: WorkerFactory
-
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
+
+        //Worker for get movies
         setupWorker()
+
+        //Get accesso token from remote config
         val accessToken = PreferencesManager(this).getAccessToken()
         if (accessToken.isNullOrEmpty()) {
             val remoteConfig = FirebaseRemoteConfig.getInstance()
@@ -49,7 +52,6 @@ class MyApp : Application(), Configuration.Provider {
             workRequest
         )
     }
-
     private suspend fun getAccessToken(remoteConfig: FirebaseRemoteConfig) {
         try {
             val fetchResult = remoteConfig.fetchAndActivate().await()
@@ -61,7 +63,6 @@ class MyApp : Application(), Configuration.Provider {
             e.printStackTrace()
         }
     }
-
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder()
             .setWorkerFactory(workerFactory)
