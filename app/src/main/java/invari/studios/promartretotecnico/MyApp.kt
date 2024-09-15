@@ -1,27 +1,33 @@
 package invari.studios.promartretotecnico
 
 import android.app.Application
-import android.util.Log
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.firebase.FirebaseApp
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import dagger.hilt.android.HiltAndroidApp
 import invari.studios.promartretotecnico.base.PreferencesManager
+import invari.studios.promartretotecnico.workers.MovieWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import androidx.work.*
+import javax.inject.Inject
 
 @HiltAndroidApp
-class MyApp : Application(){
-    private lateinit var preferencesManager: PreferencesManager
+class MyApp : Application(), Configuration.Provider {
+
+    @Inject
+    lateinit var workerFactory: WorkerFactory
 
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
-        preferencesManager = PreferencesManager(this)
-
-        val accessToken = preferencesManager.getAccessToken()
+        setupWorker()
+        val accessToken = PreferencesManager(this).getAccessToken()
         if (accessToken.isNullOrEmpty()) {
             val remoteConfig = FirebaseRemoteConfig.getInstance()
             val configSettings = FirebaseRemoteConfigSettings.Builder()
@@ -30,11 +36,21 @@ class MyApp : Application(){
             remoteConfig.setConfigSettingsAsync(configSettings)
 
             CoroutineScope(Dispatchers.IO).launch {
-                fetchAndActivateRemoteConfig(remoteConfig)
+                getAccessToken(remoteConfig)
             }
         }
     }
-    private suspend fun fetchAndActivateRemoteConfig(remoteConfig: FirebaseRemoteConfig) {
+
+    private fun setupWorker() {
+        val workRequest = OneTimeWorkRequestBuilder<MovieWorker>().build()
+        WorkManager.getInstance(this).enqueueUniqueWork(
+            "MovieWorker",
+            ExistingWorkPolicy.KEEP,
+            workRequest
+        )
+    }
+
+    private suspend fun getAccessToken(remoteConfig: FirebaseRemoteConfig) {
         try {
             val fetchResult = remoteConfig.fetchAndActivate().await()
             if (fetchResult) {
@@ -45,4 +61,9 @@ class MyApp : Application(){
             e.printStackTrace()
         }
     }
+
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
 }

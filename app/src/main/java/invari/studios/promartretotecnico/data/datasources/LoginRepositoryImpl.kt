@@ -1,10 +1,9 @@
 package invari.studios.promartretotecnico.data.datasources
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import invari.studios.promartretotecnico.base.ServiceResult
-import invari.studios.promartretotecnico.data.api.AuthenticateApi
+import invari.studios.promartretotecnico.data.api.MovieApi
 import invari.studios.promartretotecnico.data.repository.LoginRepository
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -13,7 +12,7 @@ import kotlin.coroutines.suspendCoroutine
 
 class LoginRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
-    private val authenticateApi: AuthenticateApi
+    private val authenticateApi: MovieApi
 ) : LoginRepository {
     override suspend fun signInWithGoogle(idToken: String) : ServiceResult<Boolean> {
         return suspendCoroutine { continuation ->

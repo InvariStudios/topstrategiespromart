@@ -15,6 +15,7 @@ class JwtInterceptor @Inject constructor(
         val token = preferencesManager.getAccessToken()
         val modifiedRequest = request.newBuilder()
             .header("Authorization", "Bearer $token")
+            .header("accept", "application/json")
             .build()
 
         return chain.proceed(modifiedRequest)

@@ -3,11 +3,9 @@ package invari.studios.promartretotecnico.presentation.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -16,7 +14,7 @@ import invari.studios.promartretotecnico.R
 import invari.studios.promartretotecnico.base.BaseActivity
 import invari.studios.promartretotecnico.base.ServiceResult
 import invari.studios.promartretotecnico.databinding.ActivityLoginBinding
-import invari.studios.promartretotecnico.presentation.main.MainActivity
+import invari.studios.promartretotecnico.presentation.main.ui.MainActivity
 
 @AndroidEntryPoint
 class LoginActivity : BaseActivity() {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listMoviesFragment">
+
+    <fragment
+        android:id="@+id/listMoviesFragment"
+        android:name="invari.studios.promartretotecnico.presentation.main.ui.ListMoviesFragment"
+        android:label="Popular List"
+        tools:layout="@layout/fragment_list_movies" >
+        <action
+            android:id="@+id/action_listMoviesFragment_to_detailMoviewFragment"
+            app:destination="@id/detailMoviewFragment" />
+        <action
+            android:id="@+id/action_listMoviesFragment_to_roomMoviesFragment"
+            app:destination="@id/roomMoviesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMoviewFragment"
+        android:name="invari.studios.promartretotecnico.presentation.main.ui.DetailMoviewFragment"
+        android:label="Detail Moview"
+        tools:layout="@layout/fragment_detail_moview" />
+    <fragment
+        android:id="@+id/roomMoviesFragment"
+        android:name="invari.studios.promartretotecnico.presentation.main.ui.RoomMoviesFragment"
+        android:label="Room Movies"
+        tools:layout="@layout/fragment_room_movies" />
+</navigation>

@@ -7,7 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import invari.studios.promartretotecnico.BuildConfig
 import invari.studios.promartretotecnico.base.JwtInterceptor
-import invari.studios.promartretotecnico.data.api.AuthenticateApi
+import invari.studios.promartretotecnico.data.api.MovieApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,7 +54,7 @@ object NetworkModule {
     }
     @Provides
     @Singleton
-    fun provideAuthenticationApi(retrofit: Retrofit): AuthenticateApi {
-        return retrofit.create(AuthenticateApi::class.java)
+    fun provideAuthenticationApi(retrofit: Retrofit): MovieApi {
+        return retrofit.create(MovieApi::class.java)
     }
 }

@@ -1,4 +1,4 @@
-package invari.studios.promartretotecnico.presentation.splahscreen
+package invari.studios.promartretotecnico.presentation.splashscreen
 
 import android.content.Intent
 import android.os.Bundle

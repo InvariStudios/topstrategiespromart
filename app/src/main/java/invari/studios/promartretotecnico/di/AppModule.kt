@@ -9,11 +9,13 @@ import dagger.hilt.components.SingletonComponent
 import invari.studios.promartretotecnico.base.JwtInterceptor
 import invari.studios.promartretotecnico.base.PreferencesManager
 import invari.studios.promartretotecnico.data.datasources.LoginRepositoryImpl
+import invari.studios.promartretotecnico.data.datasources.MovieRepositoryImpl
 import invari.studios.promartretotecnico.data.repository.LoginRepository
+import invari.studios.promartretotecnico.data.repository.MovieRepository
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
-@Module(includes = [NetworkModule::class])
+@Module(includes = [NetworkModule::class,DatabaseModule::class,WorkerModule::class])
 object AppModule {
 
     @Provides
@@ -35,5 +37,11 @@ object AppModule {
     @Singleton
     fun provideLoginRepository(remoteLoginRepository: LoginRepositoryImpl): LoginRepository {
         return remoteLoginRepository
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieRepository(remoteMovieRepository: MovieRepositoryImpl): MovieRepository {
+        return remoteMovieRepository
     }
 }
