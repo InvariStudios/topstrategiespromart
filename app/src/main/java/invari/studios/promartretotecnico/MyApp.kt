@@ -22,12 +22,10 @@ class MyApp : Application(), Configuration.Provider {
 
     @Inject
     lateinit var workerFactory: WorkerFactory
+    private lateinit var accessToken : String
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
-
-        //Worker for get movies
-        setupWorker()
 
         //Get accesso token from remote config
         val accessToken = PreferencesManager(this).getAccessToken()
@@ -42,6 +40,11 @@ class MyApp : Application(), Configuration.Provider {
                 getAccessToken(remoteConfig)
             }
         }
+        else{
+            //Worker for get movies
+            setupWorker()
+        }
+
     }
 
     private fun setupWorker() {
@@ -58,6 +61,7 @@ class MyApp : Application(), Configuration.Provider {
             if (fetchResult) {
                 val accessToken = remoteConfig.getString("access_token")
                 PreferencesManager(this@MyApp).saveAccessToken(accessToken)
+                setupWorker()
             }
         } catch (e: Exception) {
             e.printStackTrace()
